@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 export default function Home() {
   return (
     <div className="container">
-      <Header></Header>
+      <Header>Yash</Header>
       <Dashboard></Dashboard>
     </div>
   );
