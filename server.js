@@ -1,21 +1,34 @@
-var http = require('http');
-var express = require('express');
-var bodyParser = require('body-parser');         // Used to parse incoming messages
-var port = process.env.port;
-
-var app = express(function(req, res){
-    username = req.headers['x-iisnode-auth_user'];
-});
-
-app.use(express.static(__dirname + "/ApplicationNameOnIIS/"));
-
-app.use(bodyParser.urlencoded({ extended: false }))
-
+// parse application/json
 app.use(bodyParser.json())
 
-// Start listening on server port
-app.listen(process.env.PORT);
+// DATABASE configuration
+var config = {
+    userName: 'USERNAME',
+    password: 'PASSWORD',
+    server:   'SERVER',   
+    options: {
+        encrypt: true,
+        database: 'DATABASE',
+        rowCollectionOnRequestCompletion: true
+    }
+};
+var connection = new Connection(config);
 
-app.get('/ApplicationNameOnIIS/', function(req, res) {
-    res.sendfile(__dirname + '/index.html');    
+
+// Server that listens to port 80
+var server = http.createServer();
+
+var server = app.listen(port, function () {
+
+    var host = server.address().address
+    var port = server.address().port
+
+    console.log("Node Js app listening at http://%s:%s", host, port)
+
+});
+
+
+
+app.post('/postrequest', function (req, res) {
+    // function 
 });
